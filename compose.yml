@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  naive:
+    image: poormancontainer/caddy-naive-plugin:latest
+    container_name: "naive"
+    restart: no
+    volumes:
+      - ./srv:/srv
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./cert:/etc/ssl/naive
+    # network_mode: "host"
+    # If you want to use "host" mode,delete contents after this line in "ports",It's highly recommand to use "host" network mode.
+    ports:
+      - "443:443"
+      - "80:80"
+      - "443:443/tcp"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
